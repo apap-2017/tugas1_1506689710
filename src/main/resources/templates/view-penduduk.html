@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/index-css.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="UTF-8"/>
+
+    <title th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}">Title</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="/">SI Kependudukan</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/tambah">Tambah Penduduk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/keluarga/tambah">Tambah Keluarga</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div>
+                <div th:if="${wafat} == 'success'">
+                    <h2 th:text="'Sukses!'"></h2>
+                    <p th:text="'Penduduk dengan NIK ' + ${penduduk.nik} + ' sudah tidak aktif'"></p>
+                    <hr />
+                </div>
+                <h5 th:text="'Lihat Data Penduduk - ' + ${penduduk.nik}">Penduduk Dilihat</h5>
+                <table class="penduduk">
+                    <tbody>
+                        <tr>
+                            <td class="jenis-data" th:text="'NIK'">NIK</td>
+                            <td th:text="${penduduk.nik}">NIK</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Nama'">NAMA</td>
+                            <td th:text="${penduduk.nama}">NAMA</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Tempat/Tanggal Lahir'">TTL</td>
+                            <td th:text="${penduduk.tempat_lahir} + ', ' + ${#dates.format(penduduk.tanggal_lahir, 'dd MMMM yyyy')}">TETMPAT, TANGGAL LAHIR</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Alamat'">ALAMAT</td>
+                            <td th:text="${penduduk.keluarga.alamat}">ALAMAT</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'RT/RW'">RT/RW</td>
+                            <td th:text="${penduduk.keluarga.rt} + '/' + ${penduduk.keluarga.rw}">RT/RW</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Kelurahan/Desa'">KELURAHAN</td>
+                            <td th:text="${penduduk.keluarga.kelurahan.nama_kelurahan}">KELURAHAN</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Kecamatan'"></td>
+                            <td th:text="${penduduk.keluarga.kelurahan.kecamatan.nama_kecamatan}">KECAMATAN</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Kota'"></td>
+                            <td th:text="${penduduk.keluarga.kelurahan.kecamatan.kota.nama_kota}">KOTA</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Golongan Darah'">GOLONGAN DARAH</td>
+                            <td th:text="${penduduk.golongan_darah}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Agama'">AGAMA</td>
+                            <td th:text="${penduduk.agama}"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Status Perkawinan'">STATUS PERKAWINAN</td>
+                            <td th:text="${penduduk.status_perkawinan}">STATUS PERKAWINAN</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Pekerjaan'">PEKERJAAN</td>
+                            <td th:text="${penduduk.pekerjaan}">PEKERJAAN</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Kewarganegaraan'">KEWARGANEGARAAN</td>
+                            <td th:text="(${penduduk.is_wni} == 1) ? 'WNI' : 'WNA'">KEWARGANEGARAAN</td>
+                        </tr>
+
+                        <tr>
+                            <td class="jenis-data" th:text="'Status Kematian'">STATUS KEMATIAN</td>
+                            <td th:text="(${penduduk.is_wafat} == 1) ? 'Wafat' : 'Hidup'">STATUS KEMATIAN</td>
+                            <td>
+                                <form action="/penduduk//mati" th:if="${penduduk.is_wafat} == 0" method="post">
+                                    <input name="nik" th:value="${penduduk.nik}" hidden="hidden" />
+                                    <button type="submit" class="btn btn-danger">Nonaktifkan</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <br />
+                                <form th:action="'penduduk/ubah/' + ${penduduk.nik}" method="get">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

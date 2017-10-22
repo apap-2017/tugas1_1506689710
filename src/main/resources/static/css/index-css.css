@@ -1,0 +1,28 @@
+<style>
+.search {
+    font-size: 15pt;
+}
+label {
+    font-size: 10pt;
+    font-weight: bold;
+}
+.jenis-data {
+    font-weight: bold;
+}
+.penduduk .jenis-data {
+    width: 300px;
+}
+.keluarga .jenis-data {
+    width: 150px;
+}
+.penduduk-add {
+    padding-left: 150pt;
+}
+.container {
+    padding-top: 15pt;
+}
+
+.table-1 {
+    padding-left: 30pt;
+}
+</style>

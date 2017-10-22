@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/index-css.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="UTF-8"/>
+
+    <title>Not Found</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="/">SI Kependudukan</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/tambah">Tambah Penduduk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/keluarga/tambah">Tambah Keluarga</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div th:switch="${model}">
+                <h3 th:case="'keluarga'" th:text="'Keluarga dengan NKK ' + ${nkk} + ' tidak ditemukan'"></h3>
+                <h3 th:case="'penduduk'" th:text="'Penduduk dengan NIK ' + ${nik} + ' tidak ditemukan'"></h3>
+                <h3 th:case="'lokasi'" th:text="'Lokasi yang dicari tidak ditemukan/salah'"></h3>
+                <h3 th:case="'page'" th:text="'Halaman yang dicari tidak ditemukan'"></h3>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

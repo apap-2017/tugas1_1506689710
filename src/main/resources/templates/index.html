@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/index-css.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="UTF-8"/>
+
+    <title>Home - Sistem Kependudukan Provinsi DKI Jakarta</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="/">SI Kependudukan</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/tambah">Tambah Penduduk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/keluarga/tambah">Tambah Keluarga</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div>
+                <h1 th:text="'Sistem Informasi Kependudukan Online Provinsi DKI Jakarta'">System</h1>
+                <p th:text="'Selamat datang di Sistem Informasi Kependudukan Online Provinsi DKI Jakarta'">Welcome</p>
+                <hr />
+                <form method="get" action="/penduduk">
+                    <div class="form-group col-md-5">
+                        <p class="search" th:text="'Lihat Data Penduduk Berdasarkan NIK'">Search by NIK</p>
+                        <label for="nik">Masukkan Nomor Induk Kependudukan</label>
+                        <input type="text" id="nik" class="form-control" name="nik" />
+                        <br />
+                        <button type="submit" class="btn btn-default" th:text="'Lihat'">Find</button>
+                    </div>
+                </form>
+                <hr />
+                <form method="get" action="/keluarga">
+                    <div class="form-group col-md-5">
+                        <p class="search" th:text="'Lihat Data Penduduk Berdasarkan NKK'">Search by NKK</p>
+                        <label for="nkk" th:text="'Masukkan Nomor Kartu Keluarga'">NIK</label>
+                        <input type="text" id="nkk" class="form-control" name="nkk" />
+                        <br />
+                        <button type="submit" class="btn btn-default">Lihat</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

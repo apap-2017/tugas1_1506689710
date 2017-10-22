@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/index-css.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="UTF-8"/>
+
+    <title>Title</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="/">SI Kependudukan</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/tambah">Tambah Penduduk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/keluarga/tambah">Tambah Keluarga</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="penduduk-add">
+                    <form th:action="'/penduduk/ubah/' + ${penduduk.nik}" th:object="${penduduk}" method="post">
+                        <h4 th:text="'Ubah Penduduk'"></h4>
+                        <label th:text="'NIK'">NIK</label>
+                        <input type="text" class="form-control" th:field="*{nik}" readonly="readonly" />
+
+                        <label th:text="'Masukkan Nama'">NAMA</label>
+                        <input type="text" class="form-control" th:field="*{nama}" />
+
+                        <label th:text="'Tempat Lahir'">TEMPAT LAHIR</label>
+                        <input type="text" class="form-control" th:field="*{tempat_lahir}" />
+
+                        <label th:text="'Tanggal Lahir'">TANGGAL LAHIR</label>
+                        <input type="date" class="form-control" name="tggl_lahir" th:value="${tggl_lahir}" />
+
+                        <label th:text="'Jenis Kelamin'">GOLONGAN DARAH</label>
+                        <select class="form-control" th:field="*{jenis_kelamin}">
+                            <option th:value="'0'" th:text="'Pria'"></option>
+                            <option th:value="'1'" th:text="'Wanita'"></option>
+                        </select>
+
+                        <label th:text="'Golongan Darah'">GOLONGAN DARAH</label>
+                        <select class="form-control" th:field="*{golongan_darah}">
+                            <option th:value="'A+'" th:text="'A+'"></option>
+                            <option th:value="'A-'" th:text="'A-'"></option>
+                            <option th:value="'B+'" th:text="'B+'"></option>
+                            <option th:value="'B-'" th:text="'B-'"></option>
+                            <option th:value="'AB+'" th:text="'AB+'"></option>
+                            <option th:value="'AB-'" th:text="'AB-'"></option>
+                            <option th:value="'O+'" th:text="'O+'"></option>
+                            <option th:value="'O-'" th:text="'O-'"></option>
+                        </select>
+
+                        <label th:text="'Agama'">AGAMA</label>
+                        <input type="text" class="form-control" th:field="*{agama}" />
+
+                        <label th:text="'Status Perkawinan'">STATUS PERKAWINAN</label>
+                        <select class="form-control" th:field="*{status_perkawinan}">
+                            <option th:value="'Kawin'" th:text="'Kawin'"></option>
+                            <option th:value="'Belum Kawin'" th:text="'Belum Kawin'"></option>
+                        </select>
+
+                        <label th:text="'Pekerjaan'">PEKERJAAN</label>
+                        <input type="text" class="form-control" th:field="*{pekerjaan}" />
+
+                        <label th:text="'Kewarganegaraan'">KEWARGANEGARAAN</label>
+                        <select class="form-control" th:field="*{is_wni}">
+                            <option th:value="'0'" th:text="'WNA'"></option>
+                            <option th:value="'1'" th:text="'WNI'"></option>
+                        </select>
+
+                        <label th:text="'Status Kematian'">STATUS KEMATIAN</label>
+                        <select class="form-control" th:field="*{is_wafat}">
+                            <option th:value="'0'" th:text="'Hidup'"></option>
+                            <option th:value="'1'" th:text="'Wafat'"></option>
+                        </select>
+
+                        <label th:text="'Id Keluarga'">ID KELUARGA</label>
+                        <input type="text" class="form-control" name="id_keluarga" th:value="${id_keluarga}"/>
+
+                        <label th:text="'Status Dalam Keluarga'">STATUS DALAM KELUARGA</label>
+                        <select class="form-control" th:field="*{status_dalam_keluarga}">
+                            <option th:value="'Kepala Keluarga'" th:text="'Kepala Keluarga'"></option>
+                            <option th:value="'Istri'" th:text="'Istri'"></option>
+                            <option th:value="'Anak'" th:text="'Anak'"></option>
+                        </select>
+
+                        <br />
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

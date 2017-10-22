@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../css/index-css.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <meta charset="UTF-8"/>
+
+    <title>Cari Data - Sistem Kependudukan Provinsi DKI Jakarta</title>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="/">SI Kependudukan</a>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/penduduk/tambah">Tambah Penduduk</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/keluarga/tambah">Tambah Keluarga</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="penduduk-add">
+                    <form action="/penduduk/cari" method="get">
+                        <h4 th:text="'Lihat Data Penduduk Berdasarkan Kelurahan di ' + ${#strings.capitalizeWords(#strings.toLowerCase(kota.nama_kota))} + ' ' + ${#strings.capitalizeWords(#strings.toLowerCase(kecamatan.nama_kecamatan))}"></h4>
+                        <label for="kota" th:text="'Kota'">KOTA</label>
+                        <select class="form-control" id="kota" disabled="disabled">
+                            <option th:text="${kota.nama_kota}"></option>
+                        </select>
+                        <input name="kt" th:value="${id_kota}" hidden="hidden" />
+
+                        <label for="kecamatan" th:text="'Kecamatan'">KECAMATAN</label>
+                        <select class="form-control" id="kecamatan" name="kc" disabled="disabled">
+                            <option th:text="${kecamatan.nama_kecamatan}"></option>
+                        </select>
+                        <input name="kc" th:value="${id_kecamatan}" hidden="hidden" />
+
+                        <label for="kelurahan" th:text="'Kelurahan'">KELURAHAN</label>
+                        <select class="form-control" id="kelurahan" name="kl">
+                            <option th:value="''" th:text="'Pilih Kelurahan'"></option>
+                            <div th:each="kelurahan, iterationStatus: ${listKelurahan}">
+                                <option th:if="${kelurahan.kecamatan.kode_kecamatan} == ${id_kecamatan}" th:value="${kelurahan.kode_kelurahan}" th:text="${kelurahan.nama_kelurahan}"></option>
+                            </div>
+                        </select>
+                        <br />
+
+                        <button type="submit" class="btn btn-primary">Lihat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

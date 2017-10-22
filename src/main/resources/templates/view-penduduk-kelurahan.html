@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/datatables.js"></script>
+    <script src="../../js/data-tables.js"></script>
+    <link rel="stylesheet" href="../../css/index-css.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/datatables.css" />
+    <meta charset="UTF-8"/>
+
+    <title th:text="'Penduduk Kelurahan ' + ${#strings.capitalizeWords(#strings.toLowerCase(kelurahan.nama_kelurahan))}">Title</title>
+</head>
+
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="/">SI Kependudukan</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/penduduk/tambah">Tambah Penduduk</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/keluarga/tambah">Tambah Keluarga</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <h5 th:text="'Lihat Data Penduduk Di ' + ${#strings.capitalizeWords(#strings.toLowerCase(kota.nama_kota))} + ', Kecamatan ' + ${#strings.capitalizeWords(#strings.toLowerCase(kecamatan.nama_kecamatan))} + ', Kelurahan ' + ${#strings.capitalizeWords(#strings.toLowerCase(kelurahan.nama_kelurahan))}">Penduduk Dilihat</h5>
+    <hr />
+    <div class="row">
+        <div th:each="penduduk, iterationStatus: ${listTuaMuda}" class="col-xs-6">
+            <div th:class="'table-' + ${iterationStatus.index}">
+                <h5 th:class="'title-' + ${iterationStatus.index}" th:text="${iterationStatus.even} ? 'Penduduk Dengan Usia Termuda' : 'Penduduk Dengan Usia Tertua'"></h5>
+                <table class="table table-striped table-bordered" th:classappend="'table-' + ${iterationStatus.index}">
+                    <tbody>
+                    <tr>
+                        <td th:text="'NIK'">NIK</td>
+                        <td th:text="${penduduk.nik}"></td>
+                    </tr>
+
+                    <tr>
+                        <td th:text="'Nama'">Nama</td>
+                        <td th:text="${penduduk.nama}"></td>
+                    </tr>
+
+                    <tr>
+                        <td th:text="'Tanggal Lahir'">Tanggal Lahir</td>
+                        <td th:text="${#dates.format(penduduk.tanggal_lahir, 'dd MMMM yyyy')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <table id="table-id" class="display">
+                <thead>
+                <tr>
+                    <th th:text="'NIK'">NIK</th>
+                    <th id="nama" th:text="'Nama'">NAMA</th>
+                    <th th:text="'Jenis Kelamin'">JENIS KELAMIN</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="penduduk, iterationStatus: ${listPenduduk}">
+                    <td th:text="${penduduk.nik}">NIK</td>
+                    <td th:text="${penduduk.nama}">NAMA</td>
+                    <td th:text="(${penduduk.jenis_kelamin} == 0) ? 'Pria' : 'Wanita'">JENIS KELAMIN</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
